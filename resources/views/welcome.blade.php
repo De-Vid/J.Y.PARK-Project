@@ -122,23 +122,7 @@
         color: #333;
     }
 
-    .animated-hr {
-        border: none;
-        height: 5px;
-        background: linear-gradient(90deg, transparent, #020e11, transparent);
-        background-size: 200% 100%;
-        animation: moveLight 2s linear infinite;
-    }
 
-    @keyframes moveLight {
-        0% {
-            background-position: -200% 0;
-        }
-
-        100% {
-            background-position: 200% 0;
-        }
-    }
 </style>
 
 <body>
@@ -188,72 +172,7 @@
             </div>
         </div>
     </div>
-    <hr class="my-4 animated-hr">
-    <div class="container-fluid">
-        <footer>
-            <div class="footer-top-nav">
-                <div class="container d-flex justify-content-between align-items-center">
-                    <div class="nav-links">
-                        <a href="#">Company Info</a> | <a href="#">Investor Relations</a> |
-                        <a href="#">Recruitment</a> | <a href="#">Partnership</a> |
-                        <a href="#"><b>Privacy Policy</b></a> | <a href="#">Terms of Use</a>
-                    </div>
-                    <select class="form-select form-select-sm w-auto">
-                        <option>Global Site</option>
-                    </select>
-                </div>
-            </div>
 
-            <div class="container company-info-section">
-                <div class="row">
-                    <div class="col-md-2">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/be/Coupang_logo.svg" alt="Logo"
-                            width="120">
-                    </div>
-                    <div class="col-md-4">
-                        <p>
-                            <strong>Coupang Corp.</strong><br>
-                            CEO: Khoeurn Srey Mey<br>
-                            Address: 570 Songpa-daero, Songpa-gu, Seoul<br>
-                            Business Reg No: 120-88-00767<br>
-                            <a href="#" class="text-muted">Verify Business Info ></a>
-                        </p>
-                    </div>
-                    <div class="col-md-3">
-                        <p><strong>Customer Center</strong></p>
-                        <div class="contact-number">1577-7011</div>
-                        <p>Seoul, Songpa-gu, Songpa-daero 570<br>
-                            Email: help@coupang.com</p>
-                    </div>
-                    <div class="col-md-3">
-                        <p><strong>Payment Guarantee</strong></p>
-                        <p>We have entered into a debt payment guarantee contract for the cash paid by customers to
-                            ensure safe transactions.</p>
-                        <a href="#" class="text-muted">Check Service Subscription ></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-bottom-dark">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-md-10">
-                            <p class="mb-1">Coupang is a mail-order broker and is not a party to the mail-order sales
-                                for products of individual sellers registered on Coupang.</p>
-                            <p class="mb-1">For Marketplace products, Coupang does not take responsibility for product
-                                information and transactions.</p>
-                            <p class="mb-0">Copyright © Coupang Corp. 2010-2025 All Rights Reserved.</p>
-                        </div>
-                        <div class="col-md-2 text-end social-icons">
-                            <a href="#"><i class="fab fa-facebook"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fas fa-blog"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
