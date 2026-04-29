@@ -381,11 +381,6 @@ header {
         font-size: 0.9rem;
         /* Smaller text for small screens */
     }
-    .swiper {
-        height: auto;
-        /* Let content dictate height on mobile */
-        min-height: 150px;
-    }
     .top-utility {
         display: none;
     }
