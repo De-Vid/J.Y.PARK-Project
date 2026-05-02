@@ -28,8 +28,8 @@
         justify-content: center;
         align-items: center;
         color: white;
-        font-family: 'Inter', sans-serif;
     }
+
 </style>
 
 <body>
@@ -54,9 +54,12 @@
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-11 mt-3">
-                    <h2 class="fw-bold glow-text">
+                    <h2 id="sticky-marker" class="fw-bold glow-text">
                         Products <span class="text-light">List</span>
                     </h2>
+                    <div id="scroll-header" class="sticky-nav-hidden">
+                        @include('components.left-menu')
+                    </div>
                     <div class="col-md d-flex">
                         @include('blog.swiper-slide')
                     </div>
@@ -65,8 +68,8 @@
                         @include('slide.blog_buttom')
                     </div>
                     <br>
-                    <h2 class="fw-bold glow-text">
-                        Best <span class="text-light-2">Seller</span>
+                    <h2 id="best-seller-section" class="fw-bold glow-text">
+                        Best <span class="text-light">List</span>
                     </h2>
                     <div class="div d-flex flex-wrap">
 
@@ -79,42 +82,14 @@
             </div>
         </div>
     </div>
-
-
+    <div class="animated-hr-container">
+        <hr class="running-hr">
+    </div>
+    <div class="container-fluid">
+        @include('components.footer')
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
     <script src="/js/script.js"></script>
-    <script>
-        const swiper = new Swiper('.swiper', {
-  direction: 'horizontal', // ប្តូរមកដេកវិញបើចង់បានស្ទីលពេញនិយម
-  loop: true,
-  speed: 800, // ល្បឿនរុញ slide (ms)
-  
-  // បន្ថែម Effect ស្អាតៗដូចជា 'fade', 'cube', 'coverflow', ឬ 'flip'
-  effect: 'coverflow', 
-  coverflowEffect: {
-    rotate: 30,
-    slideShadows: false,
-  },
-
-  // Pagination
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true,
-    dynamicBullets: true, // ធ្វើឱ្យគ្រាប់ pagination រួញពង្រីកតាម slide
-  },
-
-  // Navigation arrows
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-
-  // Autoplay (ឱ្យវាដើរខ្លួនឯង)
-  autoplay: {
-    delay: 3000,
-    disableOnInteraction: false,
-  },
-});
-
-    </script>
+    <script src="/js/swiper.js"></script>
+</body>

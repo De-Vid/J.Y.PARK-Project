@@ -77,3 +77,206 @@
         font-weight: bold;
         color: #333;
     }
+    
+    #scroll-header {
+        position: fixed;
+        top: 15%;
+        left: 15px;
+        z-index: 1000;
+        display: none;
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 15px;
+        padding: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+    
+    #scroll-header.show {
+        display: block;
+        animation: slideInLeft 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    #scroll-header .container {
+        display: flex;
+        flex-direction: column;
+        backdrop-filter: blur(10px);
+        padding: 12px;
+        border-radius: 20px;
+        width: fit-content;
+        gap: 12px;
+    }
+    
+    .nav-item-custom {
+        display: flex;
+        align-items: center;
+        padding: 10px 15px;
+        cursor: pointer;
+        border-radius: 15px;
+        transition: all 0.3s ease;
+        background: transparent;
+        border: 1px solid transparent;
+    }
+    /* លាក់អក្សរ */
+    
+    .nav-item-custom span {
+        max-width: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        opacity: 0;
+        transition: all 0.4s ease;
+        font-size: 14px;
+        color: #333;
+    }
+    /* Style រួមពេល Hover */
+    
+    .nav-item-custom:hover span {
+        max-width: 160px;
+        opacity: 1;
+        margin-left: 12px;
+    }
+    
+    .nav-item-custom:hover {
+        transform: scale(1.1) translateX(5px);
+        /* រុញចេញមកក្រៅបន្តិច */
+    }
+    /* --- លក្ខខណ្ឌពណ៌នីមួយៗពេល Mouseover --- */
+    /* 1. Products List (Blue) */
+    
+    .item-products:hover {
+        border-color: #2196f3;
+    }
+    
+    .item-products:hover i,
+    .item-products:hover span {
+        color: #0d6efd;
+        font-size: 20px;
+    }
+    /* 2. Best Sellers (Red) */
+    
+    .item-best:hover {
+        border-color: #f44336;
+        font-size: 20px;
+    }
+    
+    .item-best:hover i,
+    .item-best:hover span {
+        color: #dc3545;
+        font-size: 20px;
+    }
+    /* 3. New Arrivals (Yellow/Orange) */
+    
+    .item-new:hover {
+        border-color: #ffc107;
+        font-size: 20px;
+    }
+    
+    .item-new:hover i,
+    .item-new:hover span {
+        color: #ff9800;
+        font-size: 20px;
+    }
+    /* 4. Categories (Green) */
+    
+    .item-cat:hover {
+        border-color: #4caf50;
+        font-size: 20px;
+    }
+    
+    .item-cat:hover i,
+    .item-cat:hover span {
+        color: #198754;
+        font-size: 20px;
+    }
+    /* Animation ពេលលោតចេញមក */
+    
+    @keyframes slideInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    .text-decoration-none {
+        text-decoration: none !important;
+        display: block;
+        width: 100%;
+    }
+    
+    #sticky-marker,
+    #best-seller-section {
+        scroll-margin-top: 100px;
+        /* កែសម្រួលលេខនេះតាមកម្ពស់ Header របស់អ្នក */
+    }
+    
+    .footer-section {
+        height: 300px;
+    }
+    
+    .footer-top-links a {
+        color: #666;
+        text-decoration: none;
+        font-size: 13px;
+    }
+    
+    .footer-top-links a:hover {
+        text-decoration: underline;
+    }
+    /* រៀបចំព័ត៌មានក្រុមហ៊ុន */
+    
+    .company-info p {
+        line-height: 1.8;
+        margin-bottom: 0;
+    }
+    /* រៀបចំ Section ខាងក្រោមបង្អស់ (ពណ៌ខ្មៅ) */
+    
+    .footer-bottom p {
+        font-size: 11px;
+        line-height: 1.6;
+    }
+    
+    .social-icons a {
+        transition: opacity 0.3s;
+    }
+    
+    .social-icons a:hover {
+        opacity: 0.7;
+    }
+    /* បន្ទាត់ខណ្ឌ (Divider) */
+    
+    hr {
+        border-top: 1px solid #eee;
+        opacity: 1;
+    }
+    
+    .animated-hr-container {
+        width: 100%;
+        overflow: hidden;
+    }
+    
+    .running-hr {
+        height: 3px;
+        border: none;
+        background: linear-gradient(to right, #0f0f0f, #0f0f0f, #007bff);
+        background-size: 200% 100%;
+        animation: runLine 3s linear infinite;
+        opacity: 0.8;
+    }
+    
+    @keyframes runLine {
+        0% {
+            background-position: 100% 0;
+        }
+        100% {
+            background-position: -100% 0;
+        }
+    }

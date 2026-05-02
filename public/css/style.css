@@ -431,6 +431,12 @@ header {
         top: 30px !important;
         left: 50% !important;
     }
+    #scroll-header {
+        top: 20% !important;
+        width: 40% !important;
+        /* background-color: white !important; */
+        border-radius: 20px !important;
+    }
     /* ----------------------------- */
 }
 
