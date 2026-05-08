@@ -3,18 +3,28 @@
     <div class="d-flex align-items-center">
         <div class="category-btn text-white me-3 shadow-sm position-relative" onclick="toggleMenu()">
             <i class="bi bi-list fs-2"></i>
-
             <div id="menuDropdown" class="menu-dropdown shadow">
-                <a href="#">🏠 Home</a>
-                <a href="#">📦 Products</a>
-                <a href="#">🔥 Hot Deals</a>
-                <a href="#">🛒 Orders</a>
-                <a href="#">⚙️ Settings</a>
+                <a href="#sticky-marker">
+                    <i class="bi bi-box-seam text-info"></i>
+                    <span class="fw-bold">Products List</span>
+                </a>
+                <a href="#best-seller-section">
+                    <i class="bi bi-fire text-danger"></i>
+                    <span class="fw-bold">Best Sellers</span>
+                </a>
+                <a href="#">
+                    <i class="bi bi-lightning-charge text-warning"></i>
+                    <span class="fw-bold">New Arrivals</span>
+                </a>
+                <a href="#">
+                    <i class="bi bi-grid text-primary"></i>
+                    <span class="fw-bold">Categories</span>
+                </a>
             </div>
         </div>
 
         <div class="logo">
-            <h2 class="fw-bold mb-0">J.Y.PARK CO.,LTD</h2>
+            <h2 class="fw-bold mb-0" data-lang="company">J.Y.PARK CO.,LTD</h2>
         </div>
     </div>
 

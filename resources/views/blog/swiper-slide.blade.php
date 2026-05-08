@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div class="card-body d-flex flex-column">
-                <h5 class="card-title h4">Samsung Galaxy Note</h5>
+                <h5 class="card-title">Samsung Galaxy Note</h5>
                 <p class="card-text">Price: <span class="text-danger fw-bold price">$99.99</span></p>
                 <div class="product-rating">
                     <i class="bi bi-star-fill text-warning"></i>

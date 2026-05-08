@@ -370,22 +370,8 @@ header {
 /* Mobile */
 
 @media (max-width: 768px) {
-    .product-card {
-        flex: 0 0 50%;
-        /* 2 cards per row */
-        max-width: 48%;
-        padding: 5px;
-        /* Less padding on mobile */
-    }
-    .card-title {
-        font-size: 0.9rem;
-        /* Smaller text for small screens */
-    }
-    .top-utility {
-        display: none;
-    }
     header {
-        padding: 12px 0 !important;
+        padding: 1px 0 !important;
     }
     header .container {
         flex-wrap: wrap;
@@ -422,7 +408,7 @@ header {
     .sub-nav-link {
         flex: 0 0 auto;
         font-size: 12px;
-        padding: 10px 12px;
+        padding: 7px 9px;
     }
     .main-flag {
         margin-top: -15px;
@@ -431,13 +417,82 @@ header {
         top: 30px !important;
         left: 50% !important;
     }
-    #scroll-header {
-        top: 20% !important;
-        width: 40% !important;
-        /* background-color: white !important; */
-        border-radius: 20px !important;
-    }
     /* ----------------------------- */
+    .product-card {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        max-height: 250px!important;
+        padding: 2px !important;
+    }
+    .product-card .card {
+        flex-direction: row !important;
+        align-items: center;
+        overflow: hidden;
+        border: none !important;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08) !important;
+        background: #fff;
+        transition: transform 0.3s ease;
+    }
+    /* កំណត់ទំហំរូបភាពឱ្យរៀងធំ (140px) */
+    .card-img-wrapper {
+        width: 180px !important;
+        height: 200px !important;
+        position: relative;
+        flex-shrink: 0;
+        overflow: hidden;
+    }
+    .card-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        transition: transform 0.5s ease;
+        border-radius: 25px;
+    }
+    .social-overlay {
+        position: absolute;
+        top: 0;
+        right: 10px;
+        width: 30%;
+        height: 77%;
+        background: rgba(0, 0, 0, 0.4);
+        gap: 10px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+    /* បង្ហាញ Social នៅពេល Mouseover / Hover */
+    .product-card .card:hover .social-overlay {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    /* បន្ថែម Effect ឱ្យរូបភាពរីកបន្តិចពេល hover */
+    .product-card .card:hover img {
+        transform: scale(1.1);
+    }
+    .social-overlay a {
+        color: white !important;
+        font-size: 1.2rem;
+        background: rgba(255, 255, 255, 0.2);
+        width: 35px;
+        height: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        transition: background 0.3s;
+    }
+    .social-overlay a:hover {
+        background: #696969;
+    }
+    /* ផ្នែកអត្ថបទ */
+    .card-body {
+        padding: 10px 20px !important;
+        flex: 1;
+    }
+    .card-title {
+        position: absolute;
+        top: 28%;
+        font-weight: bold !important;
+    }
 }
 
 
@@ -788,7 +843,7 @@ body.light-theme #themeToggle div {
 
 .product-card {
     width: 19.50%;
-    height: 28rem;
+    height: 25rem;
     /* បង្កើនកម្ពស់បន្តិចដើម្បីឱ្យសមាមាត្រស្អាត */
     cursor: pointer;
     margin-left: 5px;
@@ -816,8 +871,12 @@ body.light-theme #themeToggle div {
     position: relative;
     overflow: hidden;
     height: 70%;
-    border-radius: 25px 25px 0 0;
-    /* ឱ្យជ្រុងខាងលើមូលតាម Card */
+    border-radius: 20px 20px 20px 20px;
+}
+
+.card-img-wrapper img {
+    width: 100%;
+    height: 270px;
 }
 
 .card-img-top {
@@ -917,10 +976,12 @@ body.light-theme #themeToggle div {
 }
 
 .card-title {
-    font-size: 1.1rem;
-    font-weight: 700;
+    position: relative;
+    left: -12px;
+    font-size: 1.3rem;
+    font-weight: bold;
     color: #2d3436;
-    margin-bottom: 8px;
+    margin-bottom: 9px;
     transition: color 0.3s;
 }
 

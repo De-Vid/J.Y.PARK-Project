@@ -21,7 +21,8 @@ const langData = {
         menu_item_2: "Gold Box",
         menu_item_3: "Neo Gold Box<br>+All Items Sale",
         menu_item_4: "Check Coupons",
-        menu_item_5: "Food Family Month"
+        menu_item_5: "Food Family Month",
+        company: "J.Y.PARK CO.,LTD",
     },
 
     km: {
@@ -45,7 +46,9 @@ const langData = {
         menu_item_2: "ប្រអប់ទង់ដែង",
         menu_item_3: "ប្រអប់ទង់ដែងថ្មី<br>+លក់ទាំងលេខ",
         menu_item_4: "ពិនិត្យលេខកូដប្រាក់ពិសេស",
-        menu_item_5: "ខែគ្រួសារម្ហូប"
+        menu_item_5: "ខែគ្រួសារម្ហូប",
+
+        company: "ជេ.វ៉ាយ.ភីត (ខូអិលធីឌី)",
     },
 
     ko: {
@@ -69,7 +72,9 @@ const langData = {
         menu_item_2: "골드박스",
         menu_item_3: "네오 골드박스<br>+전품목 특가",
         menu_item_4: "쿠폰 확인하기",
-        menu_item_5: "식품 가정의 달"
+        menu_item_5: "식품 가정의 달",
+
+        company: "주식회사 J.Y. Park",
     }
 };
 
