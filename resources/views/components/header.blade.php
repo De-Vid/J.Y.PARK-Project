@@ -39,17 +39,17 @@
 
     <div class="d-flex ms-3 gap-3">
 
-        <a href="#" class="user-nav-item text-center">
+        <a href="{{ route('login') }}" class="user-nav-item text-center">
             <i class="bi bi-person"></i>
             <div class="fw-bold" data-lang="user">User</div>
         </a>
 
-        <a href="#" class="user-nav-item text-center position-relative">
+        {{-- <a href="#" class="user-nav-item text-center position-relative">
             <i class="bi bi-cart3"></i>
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
                 style="font-size: 9px;">0</span>
             <div class="fw-bold" data-lang="cart">Cart</div>
-        </a>
+        </a> --}}
 
         <div id="flagBox" class="user-nav-item text-center position-relative flag-box mt-3">
             <img src="/flag/flag_english.png" alt="Khmer" class="main-flag" id="mainFlag">
