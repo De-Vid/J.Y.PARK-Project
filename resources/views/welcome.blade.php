@@ -34,9 +34,6 @@
 
 <body>
 
-    <div class="top-utility py-2">
-        @include('components.header-utility')
-    </div>
 
     <header class="py-3">
         @include('components.header')
