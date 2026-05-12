@@ -12,7 +12,7 @@
         <div class="text-xl font-bold text-blue-600">🏠 Dashboard</div>
         <div class="flex items-center gap-4">
             <span class="text-sm text-gray-600">
-                👤 {{ Auth::user()->name }}
+                👤 {{ Auth::user()->name }} <br>
                 ({{ Auth::user()->phone }})
             </span>
             <form method="POST" action="{{ route('logout') }}">

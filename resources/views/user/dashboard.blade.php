@@ -45,13 +45,21 @@
 
         </nav>
 
-        <div class="card-body">
+<div class="card-body">
 
-            <p><strong>Name:</strong> {{ Auth::user()->name }}</p>
-            <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
-            <p><strong>Role:</strong> {{ Auth::user()->role }}</p>
+    <p><strong>Name:</strong> {{ Auth::user()->name }}</p>
 
-        </div>
+    @if(session('login_type') == 'email')
+        <p><strong>Email:</strong> {{ Auth::user()->email }}</p>
+    @endif
+
+    @if(session('login_type') == 'phone')
+        <p><strong>Phone:</strong> {{ Auth::user()->phone }}</p>
+    @endif
+
+    <p><strong>Role:</strong> {{ Auth::user()->role }}</p>
+
+</div>
 
 
     </div>

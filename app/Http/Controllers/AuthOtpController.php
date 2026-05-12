@@ -72,51 +72,78 @@ public function sendOtp(Request $request)
         return view('auth.verify-otp');
     }
 
-    public function verifyOtp(Request $request)
-    {
-        $request->validate([
-            'otp' => 'required|digits:6',
-        ]);
+public function verifyOtp(Request $request)
+{
+    $request->validate([
+        'otp' => 'required|digits:6',
+    ]);
 
-        $phone = session('otp_phone');
+    $phone = session('otp_phone');
 
-        if (!$phone) {
-            return redirect()->route('login')
-                ->withErrors(['phone' => 'Session หมดอายุ សូម Request OTP ម្តងទៀត']);
-        }
-
-        try {
-            $twilio = new Client(env('TWILIO_SID'), env('TWILIO_AUTH_TOKEN'));
-            $result = $twilio->verify->v2
-                ->services(env('TWILIO_VERIFY_SID'))
-                ->verificationChecks
-                ->create([
-                    'to'   => $phone,
-                    'code' => $request->otp,
-                ]);
-
-            if ($result->status !== 'approved') {
-                return back()->withErrors(['otp' => 'លេខ OTP មិនត្រឹមត្រូវ!']);
-            }
-
-        } catch (\Exception $e) {
-            return back()->withErrors(['otp' => 'មានបញ្ហា: ' . $e->getMessage()]);
-        }
-
-        $user = User::where('phone', $phone)->first();
-
-        if (!$user) {
-            return redirect()->route('login')
-                ->withErrors(['phone' => 'រកមិនឃើញ User សូម Register ម្តងទៀត']);
-        }
-
-        $user->update(['phone_verified' => true]);
-
-        Auth::login($user);
-        session()->forget('otp_phone');
-
-        return redirect('/dashboard')->with('success', 'ចូលប្រព័ន្ធបានជោគជ័យ!');
+    if (!$phone) {
+        return redirect()->route('login')
+            ->withErrors([
+                'phone' => 'Session ផុតកំណត់ សូម Request OTP ម្តងទៀត'
+            ]);
     }
+
+    try {
+
+        $twilio = new Client(
+            env('TWILIO_SID'),
+            env('TWILIO_AUTH_TOKEN')
+        );
+
+        $result = $twilio->verify->v2
+            ->services(env('TWILIO_VERIFY_SID'))
+            ->verificationChecks
+            ->create([
+                'to'   => $phone,
+                'code' => $request->otp,
+            ]);
+
+        if ($result->status !== 'approved') {
+
+            return back()->withErrors([
+                'otp' => 'លេខ OTP មិនត្រឹមត្រូវ!'
+            ]);
+        }
+
+    } catch (\Exception $e) {
+
+        return back()->withErrors([
+            'otp' => 'មានបញ្ហា: ' . $e->getMessage()
+        ]);
+    }
+
+    $user = User::where('phone', $phone)->first();
+
+    if (!$user) {
+
+        return redirect()->route('login')
+            ->withErrors([
+                'phone' => 'រកមិនឃើញ User'
+            ]);
+    }
+
+    // update phone verified
+    $user->update([
+        'phone_verified' => true
+    ]);
+
+    // login user
+    Auth::login($user);
+
+    // save login type
+    session(['login_type' => 'phone']);
+
+    // remove otp session
+    session()->forget('otp_phone');
+
+    return redirect()
+        ->route('user.dashboard')
+        ->with('success', 'ចូលប្រព័ន្ធបានជោគជ័យ!');
+}
 
     public function logout(Request $request)
     {

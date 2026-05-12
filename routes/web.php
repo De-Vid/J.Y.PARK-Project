@@ -38,8 +38,8 @@ Route::get('/verify-otp', [AuthOtpController::class, 'showVerifyForm'])->name('v
 Route::post('/verify-otp', [AuthOtpController::class, 'verifyOtp'])->name('verify.otp.submit');
 Route::post('/logout', [AuthOtpController::class, 'logout'])->name('logout');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'user'])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+        return view('user.dashboard'); 
+    })->name('user.dashboard');
 });
