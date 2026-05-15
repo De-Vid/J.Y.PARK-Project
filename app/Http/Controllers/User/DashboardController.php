@@ -12,27 +12,27 @@ class DashboardController extends Controller
         return view('user.dashboard');
     }
     public function login(Request $request)
-{
-    $request->validate([
-        'login' => 'required',
-        'password' => 'required'
-    ]);
-
-    $login = $request->login;
-    $password = $request->password;
-
-    $user = User::where('email', $login)
-                ->orWhere('phone_number', $login)
-                ->first();
-
-    if (!$user || !Hash::check($password, $user->password)) {
-        return back()->withErrors([
-            'login' => 'Invalid credentials'
+    {
+        $request->validate([
+            'login' => 'required',
+            'password' => 'required'
         ]);
+
+        $login = $request->login;
+        $password = $request->password;
+
+        $user = User::where('email', $login)
+            ->orWhere('phone_number', $login)
+            ->first();
+
+        if (!$user || !Hash::check($password, $user->password)) {
+            return back()->withErrors([
+                'login' => 'Invalid credentials'
+            ]);
+        }
+
+        Auth::login($user);
+
+        return redirect()->route('dashboard');
     }
-
-    Auth::login($user);
-
-    return redirect()->route('dashboard');
-}
 }

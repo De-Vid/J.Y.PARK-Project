@@ -241,7 +241,7 @@
                         </form>
 
                         <!-- Demo Accounts -->
-                        <div class="demo-box mt-4">
+                        <!-- <div class="demo-box mt-4">
 
                             <h6 class="fw-bold mb-2">
                                 <i class="fas fa-info-circle me-1"></i>
@@ -258,7 +258,7 @@
                                 user@example.com / password
                             </p>
 
-                        </div>
+                        </div> -->
 
                     </div>
                 </div>

@@ -32,36 +32,36 @@ class GoogleAuthController extends Controller
             if ($user) {
 
                 // UPDATE EXISTING USER
-$user->update([
+                $user->update([
 
-    'google_id' => $googleUser->getId(),
+                    'google_id' => $googleUser->getId(),
 
-    'avatar' => $googleUser->getAvatar(),
+                    'avatar' => $googleUser->getAvatar(),
 
-    'email_verified_at' => now(),
+                    'email_verified_at' => now(),
 
-]);
+                ]);
 
                 Auth::login($user);
 
             } else {
 
                 // CREATE NEW USER
-$newUser = User::create([
+            $newUser = User::create([
 
-    'name' => $googleUser->getName(),
+                'name' => $googleUser->getName(),
 
-    'email' => $googleUser->getEmail(),
+                'email' => $googleUser->getEmail(),
 
-    'google_id' => $googleUser->getId(),
+                'google_id' => $googleUser->getId(),
 
-    'avatar' => $googleUser->getAvatar(),
+                'avatar' => $googleUser->getAvatar(),
 
-    'email_verified_at' => now(),
+                'email_verified_at' => now(),
 
-    'password' => bcrypt(Str::random(16)),
+                'password' => bcrypt(Str::random(16)),
 
-]);
+            ]);
 
 Auth::login($newUser);
             }

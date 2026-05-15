@@ -9,14 +9,14 @@
         </li>
 
         <li class="nav-item" style="font-weight: bold;">
-            <a href="#" class="nav-link">
+            <a href="{{ route('admin.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-user-shield"></i>
                 <p>Admin</p>
             </a>
         </li>
 
         <li class="nav-item" style="font-weight: bold;">
-            <a href="#" class="nav-link">
+            <a href="{{ route('user.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-user"></i>
                 <p>User</p>
             </a>
