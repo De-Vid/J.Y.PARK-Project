@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Dashboard</title>
-
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700">
     <!-- FontAwesome -->
@@ -42,6 +41,19 @@
         <div class="content-wrapper">
             <section class="content-header">
                 <div class="container-fluid">
+                    @if(session('success'))
+                    <div class="alert alert-success alert-dismissible fade show mx-3 mt-3"
+                        role="alert"
+                        id="success-alert">
+
+                        <i class="fas fa-check-circle"></i>
+                        {{ session('success') }}
+
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    @endif
                     <h1 style="font-weight: bold;">User List</h1>
                 </div>
             </section>
@@ -171,6 +183,17 @@
                 input[0].setSelectionRange(strLength, strLength);
             }
         });
+            setTimeout(function () {
+        let alertBox = document.getElementById('success-alert');
+
+        if (alertBox) {
+            alertBox.classList.remove('show');
+
+            setTimeout(() => {
+                alertBox.remove();
+            }, 500);
+        }
+    }, 3000); // 7 seconds
     </script>
 </body>
 

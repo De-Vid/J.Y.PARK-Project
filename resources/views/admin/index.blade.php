@@ -47,7 +47,19 @@
 
         <!-- Content -->
         <div class="content-wrapper">
+            @if(session('success'))
+            <div class="alert alert-success alert-dismissible fade show mx-3 mt-5"
+                role="alert"
+                id="success-alert">
 
+                <i class="fas fa-check-circle"></i>
+                {{ session('success') }}
+
+                <button type="button" class="close" data-dismiss="alert">
+                    <span>&times;</span>
+                </button>
+            </div>
+            @endif
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="d-flex justify-content-between align-items-center">
@@ -252,6 +264,18 @@
             }
 
         });
+
+        setTimeout(function() {
+            let alertBox = document.getElementById('success-alert');
+
+            if (alertBox) {
+                alertBox.classList.remove('show');
+
+                setTimeout(() => {
+                    alertBox.remove();
+                }, 500);
+            }
+        }, 4000); // 7 seconds
     </script>
 
 </body>
