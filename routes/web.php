@@ -73,15 +73,6 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 // ------------------------ Add Admin & User ------------------------
 Route::prefix('admin')->group(function () {
     Route::get('/index', [AdminController::class, 'index'])->name('admin.index');
-        Route::get('/create', [AdminController::class, 'create'])
-        ->name('admin.create');
-
-    // Store Admin
-    Route::post('/store', [AdminController::class, 'store'])
-        ->name('admin.store');
-        Route::get('/edit/{id}', [AdminController::class, 'edit'])->name('admin.edit');
-    Route::post('/update/{id}', [AdminController::class, 'update'])->name('admin.update');
-
     // DELETE
     Route::delete('/delete/{id}', [AdminController::class, 'destroy'])->name('admin.delete');
 });
