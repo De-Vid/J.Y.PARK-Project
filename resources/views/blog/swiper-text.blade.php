@@ -1,5 +1,3 @@
-                        
-
                         <div class="col-md-3 mb-4 shadow-lg product-card">
                             <div class="card h-100">
                                 <div class="card-img-wrapper">

@@ -65,7 +65,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <h1 style="font-weight: bold;">Admin List</h1>
 
-                        <a href="{{ route('admin.create') }}"
+                        <a href=""
                             class="btn btn-primary">
                             <i class="fas fa-plus"></i> Add Admin
                         </a>
@@ -137,7 +137,7 @@
                                     </tr>
                                 </thead>
 
-                                <tbody>
+                                <!-- <tbody>
 
                                     @forelse($admins as $admin)
 
@@ -195,7 +195,7 @@
 
                                     @endforelse
 
-                                </tbody>
+                                </tbody> -->
 
                             </table>
                         </div>

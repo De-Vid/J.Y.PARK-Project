@@ -10,11 +10,10 @@ use App\Http\Controllers\User\UserTotalController;
 use App\Http\Controllers\AuthOtpController;
 use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PaymentController;
 
 // Public routes
-Route::get('/', function () {
-    return view('welcome');
-});
 
 // Authentication routes
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -92,3 +91,16 @@ Route::prefix('user')->group(function () {
     Route::delete('/delete/{id}', [UserTotalController::class, 'destroy'])->name('user.delete');
 });
 // ------------------------ END Admin ------------------------
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// ------------------------ Product ------------------------
+Route::get('/', [ProductController::class, 'index'])->name('home');
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+Route::post('/checkout/{id}', [PaymentController::class, 'checkout'])->name('checkout');
+Route::get('/verify', [PaymentController::class, 'verifyForm'])->name('verify.form');
+Route::post('/verify', [PaymentController::class, 'verifyTransaction'])->name('verify.transaction');
+Route::get('/payments/result', [PaymentController::class, 'verifyTransaction'])->name('payments.result');
+// ------------------------ End Product ------------------------

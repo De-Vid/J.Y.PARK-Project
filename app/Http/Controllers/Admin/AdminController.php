@@ -27,61 +27,6 @@ class AdminController extends Controller
 
         return view('admin.index', compact('admins'));
     }
-
-        public function create()
-    {
-        return view('admin.create');
-    }
-
-    // Store Admin
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'phone' => 'nullable|string|max:20',
-            'password' => 'required|min:6',
-        ]);
-
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'password' => Hash::make($request->password),
-            'role' => 'admin',
-        ]);
-
-        return redirect()
-            ->route('admin.index')
-            ->with('success', 'Admin created successfully');
-    }
-
-        public function edit($id)
-    {
-        $admin = User::findOrFail($id);
-        return view('admin.edit', compact('admin'));
-    }
-
-    // UPDATE
-    public function update(Request $request, $id)
-    {
-        $admin = User::findOrFail($id);
-
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,' . $id,
-            'phone' => 'nullable',
-        ]);
-
-        $admin->update([
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-        ]);
-
-        return redirect()->route('admin.index')->with('success', 'Updated successfully');
-    }
-
     // DELETE
     public function destroy($id)
     {
