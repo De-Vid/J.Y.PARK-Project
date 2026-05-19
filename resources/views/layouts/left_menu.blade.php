@@ -21,12 +21,40 @@
                 <p>User</p>
             </a>
         </li>
-<li class="nav-item" style="font-weight: bold;">
-    <a href="{{ route('admin.users') }}" class="nav-link">
-        <i class="nav-icon fas fa-users-cog"></i>
-        <p>User Roles</p>
-    </a>
-</li>
+
+        <li class="nav-item" style="font-weight: bold;">
+            <a href="{{ route('admin.users') }}" class="nav-link">
+                <i class="nav-icon fas fa-users-cog"></i>
+                <p>User Roles</p>
+            </a>
+        </li>
+        <li class="nav-item" style="font-weight: bold;">
+            <a href="{{ route('admin.categories.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-tags"></i>
+                <p>Categories</p>
+            </a>
+        </li>
+
+        <li class="nav-item" style="font-weight: bold;">
+            <a href="{{ route('admin.product.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-box-open"></i>
+                <p>Product</p>
+            </a>
+        </li>
+        
+        <li class="nav-item" style="font-weight: bold;">
+            <a href="{{ route('admin.orders.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-shopping-cart"></i>
+                <p>Orders</p>
+            </a>
+        </li>
+
+        <li class="nav-item" style="font-weight: bold;">
+            <a href="{{ route('admin.orders-item.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-shopping-cart"></i>
+                <p>OrdersItem</p>
+            </a>
+        </li>
 
     </ul>
 </nav>

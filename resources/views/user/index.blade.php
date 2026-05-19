@@ -1,65 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.admin')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Dashboard</title>
-    <!-- Google Font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700">
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- AdminLTE -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+@section('content')
+@if(session('success'))
+<div class="alert alert-success alert-dismissible fade show mx-3 mt-3"
+    role="alert"
+    id="success-alert">
 
-    <style>
-        .pagination {
-            margin-bottom: 0;
-        }
-    </style>
-</head>
+    <i class="fas fa-check-circle"></i>
+    {{ session('success') }}
 
-<body class="hold-transition sidebar-mini layout-navbar-fixed">
-    <div class="wrapper">
+    <button type="button" class="close" data-dismiss="alert">
+        <span>&times;</span>
+    </button>
+</div>
+@endif
+<h1 style="font-weight: bold;">User List</h1>
 
-        <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            @include('layouts.navbar')
-        </nav>
-
-        <!-- Sidebar -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <a href="#" class="brand-link text-center">
-                <span class="brand-text font-weight-light">{{ Auth::user()->name ?? 'User' }}</span>
-            </a>
-            <div class="sidebar">
-                @include('layouts.left_menu')
-            </div>
-        </aside>
-
-        <!-- Content -->
-        <div class="content-wrapper">
-            <section class="content-header">
-                <div class="container-fluid">
-                    @if(session('success'))
-                    <div class="alert alert-success alert-dismissible fade show mx-3 mt-3"
-                        role="alert"
-                        id="success-alert">
-
-                        <i class="fas fa-check-circle"></i>
-                        {{ session('success') }}
-
-                        <button type="button" class="close" data-dismiss="alert">
-                            <span>&times;</span>
-                        </button>
-                    </div>
-                    @endif
-                    <h1 style="font-weight: bold;">User List</h1>
-                </div>
-            </section>
-
-            <section class="content">
-                <div class="container-fluid">
                     <div class="card">
 
                         <!-- បន្ថែមប្រអប់ស្វែងរកនៅខាងឆ្វេងបង្អស់ (0px) និងមានតែ Icon មួយគត់ -->
@@ -129,7 +85,7 @@
                                                 @csrf
                                                 @method('DELETE')
 
-                                                <button class="btn btn-sm btn-danger" title="Delete">
+                                                <button class="btn btn-sm  btn-danger" title="Delete">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
 
@@ -152,49 +108,4 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-        </div>
-    </div>
-
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- AdminLTE -->
-    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
-
-    <!-- កូដ JavaScript សម្រាប់ដំណើរការ Auto Search -->
-    <script>
-        $(document).ready(function() {
-            let timer;
-            $('#searchInput').on('input', function() {
-                clearTimeout(timer);
-                timer = setTimeout(function() {
-                    $('#searchForm').submit();
-                }, 500);
-            });
-
-            // រក្សាទីតាំងកូនកណ្តុរ (Cursor) ឱ្យនៅចុងបញ្ចប់ពេល Web ទាញទិន្នន័យថ្មី
-            let input = $('#searchInput');
-            let strLength = input.val().length;
-            if (strLength > 0) {
-                input.focus();
-                input[0].setSelectionRange(strLength, strLength);
-            }
-        });
-            setTimeout(function () {
-        let alertBox = document.getElementById('success-alert');
-
-        if (alertBox) {
-            alertBox.classList.remove('show');
-
-            setTimeout(() => {
-                alertBox.remove();
-            }, 500);
-        }
-    }, 3000); // 7 seconds
-    </script>
-</body>
-
-</html>
+@endsection

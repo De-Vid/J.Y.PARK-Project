@@ -15,9 +15,9 @@ class ItemController extends Controller
     {
         $users = User::latest()->take(5)->get();
         $products = Product::with('categories')->latest()->take(5)->get();
-        $categories = Category::withCount('products')->get();
-        $orders = Order::with('user')->latest()->take(5)->get();
-        $orderItems = OrderItem::with(['order', 'product'])->latest()->take(10)->get();
+        $categories = Category::withCount('products')->take(5)->get();
+        $orders = Order::with('user')->latest()->take(15)->get();
+        $orderItems = OrderItem::with(['order', 'product'])->latest()->take(5)->get();
 
         $stats = [
             'total_users' => User::count(),

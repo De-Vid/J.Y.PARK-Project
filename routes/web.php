@@ -13,7 +13,10 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ItemController;
-
+use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\Admin\AdminProductController;
+use App\Http\Controllers\Order\OrderController;
+use App\Http\Controllers\Order\OrderItemController;
 
 Route::get('/item', [ItemController::class, 'index'])->name('item.index');
 // Public routes
@@ -76,7 +79,6 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 // ------------------------ Add Admin & User ------------------------
 Route::prefix('admin')->group(function () {
     Route::get('/index', [AdminController::class, 'index'])->name('admin.index');
-    // DELETE
     Route::delete('/delete/{id}', [AdminController::class, 'destroy'])->name('admin.delete');
 });
 
@@ -87,7 +89,7 @@ Route::prefix('user')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
-    Route::post('/admin/users/{id}/role', [UserController::class, 'updateRole'])->name('admin.users.role');
+    Route::post('/admin/users/{id}/role', [OrderItemController::class, 'updateRole'])->name('admin.users.role');
 });
 // ------------------------ END Admin ------------------------
 
@@ -103,3 +105,32 @@ Route::get('/verify', [PaymentController::class, 'verifyForm'])->name('verify.fo
 Route::post('/verify', [PaymentController::class, 'verifyTransaction'])->name('verify.transaction');
 Route::get('/payments/result', [PaymentController::class, 'verifyTransaction'])->name('payments.result');
 // ------------------------ End Product ------------------------
+
+// ------------------------ Admin Cayegories ------------------------
+Route::prefix('admin')->group(function () {
+    Route::get('/categories', [CategoriesController::class, 'index'])->name('admin.categories.index');
+    Route::get('/categories/create', [CategoriesController::class, 'create'])->name('admin.categories.create');
+    Route::post('/categories/store', [CategoriesController::class, 'store'])->name('admin.categories.store');
+    Route::get('/categories/edit/{id}', [CategoriesController::class, 'edit'])->name('admin.categories.edit');
+    Route::put('/categories/update/{id}', [CategoriesController::class, 'update'])->name('admin.categories.update');
+    Route::delete('/categories/{id}', [CategoriesController::class, 'destroy'])->name('admin.categories.delete');
+});
+// ------------------------ End  Admin Cayegories ------------------------
+
+// ------------------------ Admin Cayegories ------------------------
+Route::prefix('admin')->group(function () {
+    Route::get('/product', [AdminProductController::class, 'index'])->name('admin.product.index');
+});
+// ------------------------ End  Admin Cayegories ------------------------
+
+// ------------------------ Admin Cayegories ------------------------
+Route::prefix('admin')->group(function () {
+    Route::get('/orders', [OrderController::class, 'index'])->name('admin.orders.index');
+});
+// ------------------------ End  Admin Cayegories ------------------------
+
+// ------------------------ Admin Cayegories ------------------------
+Route::prefix('admin')->group(function () {
+    Route::get('/orders-item', [OrderItemController::class, 'index'])->name('admin.orders-item.index');
+});
+// ------------------------ End  Admin Cayegories ------------------------
