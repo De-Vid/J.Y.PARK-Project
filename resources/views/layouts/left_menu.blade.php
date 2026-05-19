@@ -51,7 +51,7 @@
 
         <li class="nav-item" style="font-weight: bold;">
             <a href="{{ route('admin.orders-item.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-shopping-cart"></i>
+                <i class="nav-icon fas fa-receipt"></i>
                 <p>OrdersItem</p>
             </a>
         </li>

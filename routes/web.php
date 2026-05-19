@@ -12,13 +12,11 @@ use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\ItemController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\Admin\AdminProductController;
 use App\Http\Controllers\Order\OrderController;
 use App\Http\Controllers\Order\OrderItemController;
 
-Route::get('/item', [ItemController::class, 'index'])->name('item.index');
 // Public routes
 
 // Authentication routes
