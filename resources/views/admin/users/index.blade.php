@@ -5,13 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Dashboard</title>
-
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700">
-
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <!-- AdminLTE -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
 
@@ -23,7 +20,6 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-navbar-fixed">
-
     <div class="wrapper">
 
         <!-- Navbar -->
@@ -33,13 +29,9 @@
 
         <!-- Sidebar -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
-
             <a href="#" class="brand-link text-center">
-                <span class="brand-text font-weight-light">
-                    {{ Auth::user()->name ?? 'Admin' }}
-                </span>
+                <span class="brand-text font-weight-light">{{ Auth::user()->name ?? 'User' }}</span>
             </a>
-
             <div class="sidebar">
                 @include('layouts.left_menu')
             </div>
@@ -47,56 +39,39 @@
 
         <!-- Content -->
         <div class="content-wrapper">
-            @if(session('success'))
-            <div class="alert alert-success alert-dismissible fade show mx-3 mt-5"
-                role="alert"
-                id="success-alert">
-
-                <i class="fas fa-check-circle"></i>
-                {{ session('success') }}
-
-                <button type="button" class="close" data-dismiss="alert">
-                    <span>&times;</span>
-                </button>
-            </div>
-            @endif
             <section class="content-header">
                 <div class="container-fluid">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h1 style="font-weight: bold;">Admin List</h1>
+                    @if(session('success'))
+                    <div class="alert alert-success alert-dismissible fade show mx-3 mt-3"
+                        role="alert"
+                        id="success-alert">
 
-                        <a href=""
-                            class="btn btn-primary">
-                            <i class="fas fa-plus"></i> Add Admin
-                        </a>
+                        <i class="fas fa-check-circle"></i>
+                        {{ session('success') }}
+
+                        <button type="button" class="close" data-dismiss="alert">
+                            <span>&times;</span>
+                        </button>
                     </div>
+                    @endif
+                    <h1 style="font-weight: bold;">All Users</h1>
                 </div>
             </section>
 
             <section class="content">
                 <div class="container-fluid">
-
                     <div class="card">
 
-                        <!-- Search -->
+                        <!-- បន្ថែមប្រអប់ស្វែងរកនៅខាងឆ្វេងបង្អស់ (0px) និងមានតែ Icon មួយគត់ -->
                         <div class="card-header d-flex align-items-center justify-content-end py-3">
-
-                            <form action="{{ url()->current() }}"
-                                method="GET"
-                                id="searchForm"
-                                class="w-100"
-                                style="max-width: 500px;">
-
+                            <form action="{{ url()->current() }}" method="GET" id="searchForm" class="w-100" style="max-width: 500px;">
                                 <div class="input-group shadow-sm">
-
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-white border-right-0 text-muted">
                                             <i class="fas fa-search"></i>
                                         </span>
                                     </div>
-
-                                    <input
-                                        class="form-control border-left-0 pl-0"
+                                    <input class="form-control border-left-0 pl-0"
                                         type="search"
                                         name="search"
                                         id="searchInput"
@@ -108,155 +83,117 @@
 
                                     @if(request('search'))
                                     <div class="input-group-append">
-                                        <a href="{{ url()->current() }}"
-                                            class="btn btn-secondary d-flex align-items-center px-3"
-                                            title="Clear Search">
+                                        <a href="{{ url()->current() }}" class="btn btn-secondary d-flex align-items-center px-3" title="Clear Search">
                                             <i class="fas fa-times"></i>
                                         </a>
                                     </div>
                                     @endif
-
                                 </div>
                             </form>
                         </div>
 
-                        <!-- Table -->
                         <div class="card-body p-0">
-
                             <table class="table table-striped table-bordered">
-
                                 <thead class="table-dark">
                                     <tr>
-                                        <th style="width: 50px">ID</th>
+                                        <th>ID</th>
                                         <th>Name</th>
                                         <th>Email</th>
-                                        <th>Phone</th>
                                         <th>Login Type</th>
-                                        <th>Created At</th>
-                                        <th>Actions</th>
+                                        <th>Current Role</th>
+                                        <th>Change Role</th>
                                     </tr>
                                 </thead>
-
-                                <!-- <tbody>
-
-                                    @forelse($admins as $admin)
-
+                                <tbody>
+                                    @forelse($users as $user)
                                     <tr>
-
-                                        <td>{{ $admin->id }}</td>
-
-                                        <td>{{ $admin->name }}</td>
-
-                                        <td>{{ $admin->email ?? 'N/A' }}</td>
-
-                                        <td>{{ $admin->phone ?? 'N/A' }}</td>
-
+                                        <td>{{ $user->id }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->email }}</td>
                                         <td>
-                                            @if($admin->google_id)
-                                            <span class="badge badge-danger">
-                                                <i class="fab fa-google"></i> Google
-                                            </span>
+                                            @if($user->google_id)
+                                            <span class="badge badge-danger"><i class="fab fa-google"></i> Google</span>
                                             @else
-                                            <span class="badge badge-info">
-                                                <i class="fas fa-phone"></i> Phone
-                                            </span>
+                                            <span class="badge badge-info"><i class="fas fa-phone"></i> Phone</span>
                                             @endif
                                         </td>
-
                                         <td>
-                                            {{ $admin->created_at ? $admin->created_at->format('d-M-Y') : 'N/A' }}
+                                            <span class="badge bg-primary">
+                                                {{ $user->role }}
+                                            </span>
                                         </td>
                                         <td>
-                                            <!-- Delete Icon -->
-                                            <form action="{{ route('admin.delete', $admin->id) }}"
+                                            <form action="{{ route('admin.users.role', $user->id) }}"
                                                 method="POST"
-                                                style="display:inline-block"
-                                                onsubmit="return confirm('Are you sure?')">
+                                                class="d-flex align-items-center">
 
                                                 @csrf
-                                                @method('DELETE')
 
-                                                <button class="btn btn-sm btn-danger" title="Delete">
-                                                    <i class="fas fa-trash"></i>
+                                                <select name="role"
+                                                    class="form-select form-select-sm border-0 shadow-sm me-3"
+                                                    style="width: 140px; margin-left: 10px;">
+
+                                                    <option value="user"
+                                                        {{ $user->role == 'user' ? 'selected' : '' }}>
+                                                        👤 User
+                                                    </option>
+
+                                                    <option value="admin"
+                                                        {{ $user->role == 'admin' ? 'selected' : '' }}>
+                                                        🛡️ Admin
+                                                    </option>
+
+                                                </select>
+
+                                                <button class="btn btn-success btn-sm shadow-sm px-3">
+                                                    <i class="fa-solid fa-pen-to-square me-1"></i>
+                                                    Update
                                                 </button>
 
                                             </form>
                                         </td>
-
                                     </tr>
-
                                     @empty
-
                                     <tr>
-                                        <td colspan="6" class="text-center">
-                                            No data found
-                                        </td>
+                                        <td colspan="6" class="text-center">No data found</td>
                                     </tr>
-
                                     @endforelse
-
-                                </tbody> -->
-
+                                </tbody>
                             </table>
                         </div>
 
-                        <!-- Pagination -->
-                        <div class="card-footer clearfix">
-
-                            <div class="float-right">
-                                {{ $admins->appends([
-                                'search' => request('search')
-                            ])->links() }}
-                            </div>
-
-                        </div>
-
                     </div>
-
                 </div>
             </section>
-
         </div>
-
     </div>
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
     <!-- AdminLTE -->
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
 
-    <!-- Auto Search -->
+    <!-- កូដ JavaScript សម្រាប់ដំណើរការ Auto Search -->
     <script>
         $(document).ready(function() {
-
             let timer;
-
             $('#searchInput').on('input', function() {
-
                 clearTimeout(timer);
-
                 timer = setTimeout(function() {
                     $('#searchForm').submit();
                 }, 500);
-
             });
 
-            // Keep cursor position
+            // រក្សាទីតាំងកូនកណ្តុរ (Cursor) ឱ្យនៅចុងបញ្ចប់ពេល Web ទាញទិន្នន័យថ្មី
             let input = $('#searchInput');
-
             let strLength = input.val().length;
-
             if (strLength > 0) {
                 input.focus();
                 input[0].setSelectionRange(strLength, strLength);
             }
-
         });
-
         setTimeout(function() {
             let alertBox = document.getElementById('success-alert');
 
@@ -267,9 +204,8 @@
                     alertBox.remove();
                 }, 500);
             }
-        }, 4000); // 7 seconds
+        }, 3000); // 7 seconds
     </script>
-
 </body>
 
 </html>

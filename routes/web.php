@@ -81,6 +81,11 @@ Route::prefix('user')->group(function () {
     Route::get('/index', [UserTotalController::class, 'index'])->name('user.index');
     Route::delete('/delete/{id}', [UserTotalController::class, 'destroy'])->name('user.delete');
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
+    Route::post('/admin/users/{id}/role', [UserController::class, 'updateRole'])->name('admin.users.role');
+});
 // ------------------------ END Admin ------------------------
 
 // Route::get('/', function () {
@@ -90,7 +95,7 @@ Route::prefix('user')->group(function () {
 // ------------------------ Product ------------------------
 Route::get('/', [ProductController::class, 'index'])->name('home');
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
-Route::post('/checkout/{id}', [PaymentController::class, 'checkout'])->name('checkout');
+Route::post('/checkout/{id}', [PaymentController::class, 'checkout'])->middleware('auth')->name('checkout');
 Route::get('/verify', [PaymentController::class, 'verifyForm'])->name('verify.form');
 Route::post('/verify', [PaymentController::class, 'verifyTransaction'])->name('verify.transaction');
 Route::get('/payments/result', [PaymentController::class, 'verifyTransaction'])->name('payments.result');

@@ -1,123 +1,374 @@
+<!-- resources/views/layouts/app.blade.php -->
+
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Coupang Header</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/css/style.css">
 
+    <title>@yield('title', 'Premium Coupang Header')</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link
         href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Stack+Sans+Headline:wght@200..700&display=swap"
         rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/header.css">
+
+    <!-- Swiper -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    @yield('styles')
+
+    <style>
+        .swiper-slide {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        /* ===== Global Product Styles ===== */
+        .product-container {
+            padding: 0 15px;
+            color: #333;
+        }
+
+        body {
+            background: #f8f9fb;
+        }
+
+        /* ===== Typography ===== */
+        .price-large {
+            font-size: 2.3rem;
+            font-weight: bold;
+            color: #111;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 1rem;
+        }
+
+        .discount-badge {
+            background: #ff4d4f;
+            color: white;
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 700;
+        }
+
+        .text-rocket {
+            color: #0073e9;
+            font-weight: 900;
+            font-style: italic;
+        }
+
+        /* ===== Product Card ===== */
+        .product-card {
+            width: 100%;
+            height: auto;
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            padding: 25px;
+        }
+
+        /* ===== Gallery ===== */
+        .gallery-container {
+            position: sticky;
+            top: 20px;
+        }
+
+        #image-zoom {
+            width: 100%;
+            position: relative;
+            cursor: crosshair;
+            border-radius: 16px;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid #eee;
+        }
+
+        #image-zoom img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            display: block;
+            transition: 0.3s;
+        }
+
+        #image-zoom::after {
+            content: '';
+            display: var(--display);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: var(--url);
+            background-size: 250%;
+            background-position: var(--zoom-x) var(--zoom-y);
+            pointer-events: none;
+        }
+
+        .thumbs {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .thumb {
+            width: 85px;
+            height: 85px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: 0.3s;
+            background: #fff;
+        }
+
+        .thumb:hover {
+            transform: translateY(-3px);
+            border-color: #0073e9;
+        }
+
+        .thumb.active {
+            border-color: #0073e9;
+            box-shadow: 0 4px 12px rgba(0, 115, 233, 0.25);
+        }
+
+        /* ===== Quantity ===== */
+        .qty-box {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            overflow: hidden;
+            width: 140px;
+            height: 55px;
+            background: #fff;
+        }
+
+        .qty-btn {
+            width: 45px;
+            height: 55px;
+            border: none;
+            background: #f5f5f5;
+            font-size: 20px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .qty-btn:hover {
+            background: #0073e9;
+            color: white;
+        }
+
+        .qty-input {
+            width: 50px;
+            border: none;
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+            background: transparent;
+        }
+
+        .qty-input:focus {
+            outline: none;
+        }
+
+        /* ===== Buttons ===== */
+        .btn-cart {
+            border: 2px solid #0073e9;
+            color: #0073e9;
+            background: white;
+            font-weight: 700;
+            border-radius: 14px;
+            transition: 0.3s;
+        }
+
+        .btn-cart:hover {
+            background: #0073e9;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-buy {
+            border: 2px solid green;
+            color: green;
+            background: white;
+            font-weight: bold;
+            border-radius: 14px;
+            transition: 0.3s;
+        }
+
+        .btn-buy:hover {
+            background: green;
+            color: white;
+            font-weight: bold;
+            transform: translateY(-2px);
+        }
+
+        /* ===== Product Specs ===== */
+        .spec-box {
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .spec-box li {
+            margin-bottom: 10px;
+        }
+
+        /* ===== Recommendation ===== */
+        .recommendation-card {
+            border-radius: 16px;
+            border: 1px solid #eee;
+            padding: 15px;
+            transition: 0.3s;
+            background: white;
+        }
+
+        .recommendation-card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+            transform: translateY(-2px);
+        }
+
+        hr {
+            border-top: 1px solid #eee;
+            margin: 1.5rem 0;
+        }
+    </style>
 </head>
-<style>
-    #image-zoom {
-        width: 550px;
-        height: 450px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        position: relative;
-        overflow: hidden;
-        cursor: zoom-in;
-        border-radius: 10px;
-        background: #fff;
-    }
-
-    #image-zoom img {
-        width: 100%;
-        height: 100%;
-        cursor: pointer;
-        object-position: 0 0;
-    }
-
-    #image-zoom::after {
-        display: var(--display);
-        content: '';
-        width: 100%;
-        height: 100%;
-        background-image: var(--url);
-        background-size: 200%;
-        background-position: var(--zoom-x) var(--zoom-y);
-        position: absolute;
-        left: 0;
-        top: 0;
-        pointer-events: none;
-    }
-
-    /* Thumbnail Images */
-    .thumbs {
-        display: flex;
-        gap: 10px;
-        margin-top: 15px;
-    }
-
-    .thumbs img {
-        width: 100px;
-        height: 90px;
-        border-radius: 8px;
-        cursor: pointer;
-        border: 3px solid transparent;
-        transition: 0.3s;
-    }
-
-    .thumbs img:hover {
-        transform: scale(1.05);
-    }
-
-    .thumbs img.active {
-        border-color: #0d6efd;
-    }
-
-            .product-container { max-width: 800px; margin: 20px auto; padding: 20px; border: 1px solid #eee; }
-        .price-large { font-size: 1.75rem; font-weight: 700; color: #111; }
-        .text-rocket { color: #0073e9; font-style: italic; font-weight: bold; }
-        .badge-tomorrow { color: #008a00; border: 1px solid #008a00; padding: 2px 4px; border-radius: 3px; font-size: 0.75rem; }
-        .selection-box { border: 1px solid #ddd; padding: 10px; background-color: #f9f9f9; display: flex; justify-content: space-between; align-items: center; }
-        .btn-cart { border: 1px solid #0073e9; color: #0073e9; background: white; font-weight: bold; padding: 12px; }
-        .btn-buy { background-color: #0073e9; color: white; font-weight: bold; padding: 12px; }
-        .btn-buy:hover { background-color: #005bb5; color: white; }
-        .recommendation-card { border: 1px solid #eee; border-radius: 4px; padding: 10px; font-size: 0.9rem; }
-</style>
 
 <body>
 
-    <div class="top-utility py-2">
-        @include('components.header-utility')
-    </div>
-
+    <!-- Header -->
     <header class="py-3">
         @include('components.header')
     </header>
 
-    <nav class="sub-nav">
-        @include('components.navbar')
-    </nav>
+    <!-- Main Content -->
+    <main>
+        @yield('content')
+    </main>
 
-    <div class="container">
-        <div class="col-md-12 mt-2">
-            <div class="row">
-                <div class="col-md-12 mt-3">
-                    @yield('section')
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="animated-hr-container">
-        <hr class="running-hr">
-    </div>
+    <!-- Footer -->
     <div class="container-fluid">
         @include('components.footer')
     </div>
+
+    <!-- JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
     <script src="/js/script.js"></script>
     <script src="/js/swiper.js"></script>
 
+    @yield('scripts')
+
 </body>
+<script>
+    let imageZoom = document.getElementById('image-zoom');
+    let mainImage = document.getElementById('main-image');
+    let thumbs = document.querySelectorAll('.thumb');
+
+    /* ===== Zoom Effect ===== */
+    imageZoom.addEventListener('mousemove', (event) => {
+
+        imageZoom.style.setProperty('--display', 'block');
+
+        let pointer = {
+            x: (event.offsetX * 100) / imageZoom.offsetWidth,
+            y: (event.offsetY * 100) / imageZoom.offsetHeight,
+        };
+
+        imageZoom.style.setProperty('--zoom-x', pointer.x + '%');
+        imageZoom.style.setProperty('--zoom-y', pointer.y + '%');
+
+    });
+
+    imageZoom.addEventListener('mouseout', () => {
+        imageZoom.style.setProperty('--display', 'none');
+    });
+
+    /* ===== Change Image ===== */
+    thumbs.forEach((thumb) => {
+
+        thumb.addEventListener('click', () => {
+
+            let imageSrc = thumb.getAttribute('src');
+
+            mainImage.src = imageSrc;
+
+            imageZoom.style.setProperty('--url', `url('${imageSrc}')`);
+
+            thumbs.forEach(img => img.classList.remove('active'));
+
+            thumb.classList.add('active');
+
+        });
+
+    });
+
+    /* ===== Quantity ===== */
+    function increaseQty() {
+
+        let qty = document.getElementById('qty');
+
+        let value = parseInt(qty.value);
+
+        qty.value = value + 1;
+
+        syncQty();
+    }
+
+    function decreaseQty() {
+
+        let qty = document.getElementById('qty');
+
+        let value = parseInt(qty.value);
+
+        if (value > 1) {
+            qty.value = value - 1;
+        }
+
+        syncQty();
+    }
+
+    function syncQty() {
+
+        let qty = document.getElementById('qty').value;
+
+        document.getElementById('cart_qty').value = qty;
+
+        document.getElementById('checkout_qty').value = qty;
+    }
+
+</script>
+
+</html> 

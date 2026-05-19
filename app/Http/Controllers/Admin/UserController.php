@@ -9,50 +9,41 @@ use Hash;
 
 class UserController extends Controller
 {
-    public function create()
+
+    public function index(Request $request)
     {
-        return view('admin.users.create');
+        // ចាប់យកពាក្យគន្លឹះពីប្រអប់ Input ឈ្មោះ 'search'
+        $search = $request->input('search');
+
+        // បង្កើត Query មូលដ្ឋានសម្រាប់ទាញតែគណនី 'user'
+        $query = User::where('role', 'user');
+
+        // ប្រសិនបើមានការវាយស្វែងរក
+        if (!empty($search)) {
+            $query->where('email', 'LIKE', '%' . $search . '%');
+        }
+
+        // បង្ហាញទិន្នន័យម្តង ១០ នាក់
+        $users = $query->paginate(10);
+
+        return view('admin.users.index', compact('users'));
     }
 
-    public function store(Request $request)
+
+
+
+    public function updateRole(Request $request, $id)
     {
         $request->validate([
-            'name'=>'required',
-            'email'=>'required|email|unique:users,email',
-            'password'=>'required',
-            'role'=>'required'
+            'role' => 'required|in:user,admin',
         ]);
 
-        User::create([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'password'=>Hash::make($request->password),
-            'role'=>$request->role
-        ]);
+        $user = User::findOrFail($id);
 
-        return redirect()->route('admin.users');
-    }
+        $user->role = $request->role;
+        $user->save();
 
-    public function edit(User $user)
-    {
-        return view('admin.users.edit', compact('user'));
-    }
-
-    public function update(Request $request, User $user)
-    {
-        $request->validate([
-            'name'=>'required',
-            'email'=>"required|email|unique:users,email,{$user->id}",
-            'role'=>'required'
-        ]);
-
-        $user->update([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'role'=>$request->role
-        ]);
-
-        return redirect()->route('admin.users');
+        return back()->with('success', 'Role updated successfully');
     }
 
     public function destroy(User $user)

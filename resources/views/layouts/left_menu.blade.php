@@ -21,6 +21,12 @@
                 <p>User</p>
             </a>
         </li>
+<li class="nav-item" style="font-weight: bold;">
+    <a href="{{ route('admin.users') }}" class="nav-link">
+        <i class="nav-icon fas fa-users-cog"></i>
+        <p>User Roles</p>
+    </a>
+</li>
 
     </ul>
 </nav>
