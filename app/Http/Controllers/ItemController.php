@@ -1,41 +1,32 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\OrderItem;
+use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class ItemController extends Controller
 {
     public function index()
     {
-        $totalUsers = User::count();
-        $totalAdmins = User::where('role', 'admin')->count();
-        $totalRegularUsers = User::where('role', 'user')->count();
-        // -------- new --------
+        $users = User::latest()->take(5)->get();
         $products = Product::with('categories')->latest()->take(5)->get();
         $categories = Category::withCount('products')->get();
         $orders = Order::with('user')->latest()->take(5)->get();
         $orderItems = OrderItem::with(['order', 'product'])->latest()->take(10)->get();
 
         $stats = [
+            'total_users' => User::count(),
             'total_products' => Product::count(),
             'total_categories' => Category::count(),
             'total_orders' => Order::count(),
             'total_revenue' => Order::where('status', 'completed')->sum('total'),
         ];
 
-        return view('admin.dashboard', compact('totalUsers', 'totalAdmins', 'totalRegularUsers','products', 'categories', 'orders', 'orderItems', 'stats'));
-    }
-
-    public function manageUsers()
-    {
-        $users = User::all();
-        return view('admin.users.index', compact('users'));
+        return view('item.index', compact('users', 'products', 'categories', 'orders', 'orderItems', 'stats'));
     }
 }

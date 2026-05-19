@@ -14,9 +14,18 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasFactory, Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'password','role',
-        'phone', 'otp_code', 'otp_expires_at', 'phone_verified',
-        'phone_number','google_id','avatar','phone_verified_at',
+        'name',
+        'email',
+        'password',
+        'role',
+        'phone',
+        'otp_code',
+        'otp_expires_at',
+        'phone_verified',
+        'phone_number',
+        'google_id',
+        'avatar',
+        'phone_verified_at',
     ];
 
     protected $hidden = [
@@ -38,5 +47,10 @@ class User extends Authenticatable implements MustVerifyEmail
             'otp_expires_at' => 'datetime',
             'phone_verified'  => 'boolean',
         ];
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

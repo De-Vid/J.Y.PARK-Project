@@ -12,7 +12,10 @@ use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ItemController;
 
+
+Route::get('/item', [ItemController::class, 'index'])->name('item.index');
 // Public routes
 
 // Authentication routes
