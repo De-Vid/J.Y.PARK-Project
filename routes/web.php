@@ -126,9 +126,4 @@ Route::prefix('admin')->group(function () {
     Route::get('/orders', [OrderController::class, 'index'])->name('admin.orders.index');
 });
 // ------------------------ End  Admin Cayegories ------------------------
-
-// ------------------------ Admin Cayegories ------------------------
-Route::prefix('admin')->group(function () {
-    Route::get('/orders-item', [OrderItemController::class, 'index'])->name('admin.orders-item.index');
-});
-// ------------------------ End  Admin Cayegories ------------------------
+Route::get('/admin/orders/{id}/check', [OrderController::class, 'check'])->name('admin.orders.check');

@@ -11,11 +11,8 @@
     </button>
 </div>
 @endif
-<div class="d-flex justify-content-between align-items-center px-3">
-    <h1 class="m-0 font-weight-bold">Product List</h1>
-    <a href="{{ route('admin.categories.create') }}" class="btn btn-primary">
-        <i class="fas fa-plus"></i> Add New
-    </a>
+<div class="px-3">
+    <h2 class="m-0 font-weight-bold">Product List</h2>
 </div>
 
 <div class="card">
@@ -49,6 +46,7 @@
                     <th>Total</th>
                     <th>Status</th>
                     <th>Date</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -63,6 +61,11 @@
                         </span>
                     </td>
                     <td>{{ $order->created_at->format('Y-m-d') }}</td>
+                    <td class="text-center">
+                        <a href="{{ route('admin.orders.check', $order->id) }}" class="btn btn-sm btn-success font-weight-bold px-3" title="View Details">
+                            {{ $order->orderItems->count() }} {{ Str::plural('Item', $order->orderItems->count()) }}
+                        </a>
+                    </td>
                 </tr>
                 @empty
                 <tr>

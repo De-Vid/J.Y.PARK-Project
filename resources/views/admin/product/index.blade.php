@@ -47,7 +47,7 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Price</th>
-                    <th>Categories</th>
+                    <th>Products</th>
                 </tr>
             </thead>
             <tbody>
