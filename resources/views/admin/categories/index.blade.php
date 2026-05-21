@@ -59,18 +59,102 @@
                     <td>
                         <!-- Edit Button -->
                         <a href="{{ route('admin.categories.edit', $category->id) }}"
-                            class="btn btn-sm btn-success"
+                            class="btn btn-outline-success btn-sm rounded-circle shadow-sm"
                             title="Edit">
 
                             <i class="fas fa-edit"></i>
                         </a>
-                        <form action="{{ route('admin.categories.delete', $category->id) }}" method="POST" style="display:inline-block" onsubmit="return confirm('Are you sure?')">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-sm btn-danger" title="Delete">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </form>
+<!-- Delete Button -->
+<button type="button"
+    class="btn btn-outline-danger btn-sm rounded-circle shadow-sm"
+    data-bs-toggle="modal"
+    data-bs-target="#deleteCategoryModal{{ $category->id }}"
+    title="Delete">
+
+    <i class="fas fa-trash"></i>
+</button>
+
+<!-- Premium Delete Modal -->
+<div class="modal fade"
+    id="deleteCategoryModal{{ $category->id }}"
+    tabindex="-1"
+    aria-labelledby="deleteCategoryModalLabel{{ $category->id }}"
+    aria-hidden="true">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content border-0 overflow-hidden shadow-lg">
+
+            <!-- Top Border -->
+            <div class="bg-danger" style="height: 6px;"></div>
+
+            <!-- Body -->
+            <div class="modal-body p-5 text-center">
+
+                <!-- Icon -->
+                <div class="mb-4">
+
+                    <div class="delete-icon-box mx-auto">
+
+                        <i class="fas fa-trash-alt text-danger"
+                            style="font-size: 42px;"></i>
+
+                    </div>
+
+                </div>
+
+                <!-- Title -->
+                <h3 class="fw-bold text-dark mb-3">
+                    Delete Category?
+                </h3>
+
+                <!-- Description -->
+                <p class="text-muted mb-1">
+                    You are about to permanently delete:
+                </p>
+
+                <h5 class="fw-semibold text-dark mb-3">
+                    {{ $category->name }}
+                </h5>
+
+                <p class="small text-secondary mb-4">
+                    This action cannot be undone.
+                </p>
+
+                <!-- Buttons -->
+                <div class="d-flex justify-content-center gap-3">
+
+                    <button type="button"
+                        class="btn btn-light px-4 rounded-pill fw-semibold"
+                        data-bs-dismiss="modal">
+
+                        Cancel
+                    </button>
+
+                    <form action="{{ route('admin.categories.delete', $category->id) }}"
+                        method="POST">
+
+                        @csrf
+                        @method('DELETE')
+
+                        <button type="submit"
+                            class="btn btn-danger px-4 rounded-pill fw-semibold shadow-sm">
+
+                            <i class="fas fa-trash me-1"></i>
+                            Delete
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
                     </td>
                 </tr>
                 @empty

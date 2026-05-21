@@ -69,6 +69,119 @@
     .form-control {
         border-radius: 10px;
     }
+    .delete-icon-box {
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    background: rgba(220, 53, 69, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: pulse 1.8s infinite;
+}
+
+.delete-icon-box i {
+    font-size: 40px;
+    color: #dc3545;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.4);
+    }
+
+    70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 18px rgba(220, 53, 69, 0);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(220, 53, 69, 0);
+    }
+}
+
+.modal-content {
+    animation: smoothModal .25s ease;
+}
+
+@keyframes smoothModal {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+.form-select {
+    height: 50px;
+    border-radius: 14px;
+    border: 1px solid #e5e7eb;
+    padding-left: 18px;
+    padding-right: 45px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #212529;
+    background-color: #fff;
+    transition: all .25s ease;
+
+    /* Custom Arrow */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='%236c757d' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 5.646a.5.5 0 0 1 .708 0L8 11.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 16px;
+
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .04);
+}
+
+/* Hover */
+.form-select:hover {
+    border-color: #198754;
+    box-shadow: 0 8px 20px rgba(25, 135, 84, .08);
+}
+
+/* Focus */
+.form-select:focus {
+    border-color: #198754;
+    box-shadow: 0 0 0 .2rem rgba(25, 135, 84, .15);
+    outline: none;
+}
+
+/* OPTION STYLE */
+.form-select option {
+    padding: 12px;
+    font-weight: 500;
+}
+
+/* DARK OPTION SELECTED */
+.form-select option:checked {
+    background: #198754;
+    color: #fff;
+}
+
+/* INSIDE MODAL */
+.modal .form-select {
+    background-color: #fdfdfd;
+}
+
+/* MOBILE */
+@media(max-width:576px) {
+
+    .form-select {
+        height: 46px;
+        font-size: 14px;
+    }
+
+}
 </style>
 <body class="hold-transition sidebar-mini layout-navbar-fixed">
 
@@ -118,7 +231,7 @@
 
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE -->
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
 

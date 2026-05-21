@@ -3,9 +3,7 @@
 @section('content')
 <div class="container-fluid">
     @if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show mx-3 mt-3"
-        role="alert"
-        id="success-alert">
+    <div class="alert alert-success alert-dismissible fade show mx-3 mt-3" role="alert" id="success-alert">
 
         <i class="fas fa-check-circle"></i>
         {{ session('success') }}
@@ -29,19 +27,14 @@
                         <i class="fas fa-search"></i>
                     </span>
                 </div>
-                <input class="form-control border-left-0 pl-0"
-                    type="search"
-                    name="search"
-                    id="searchInput"
-                    placeholder="Type email to search automatically..."
-                    aria-label="Search"
-                    value="{{ request('search') }}"
-                    autocomplete="off"
-                    style="height: 42px; font-size: 1rem;">
+                <input class="form-control border-left-0 pl-0" type="search" name="search" id="searchInput"
+                    placeholder="Type email to search automatically..." aria-label="Search"
+                    value="{{ request('search') }}" autocomplete="off" style="height: 42px; font-size: 1rem;">
 
                 @if(request('search'))
                 <div class="input-group-append">
-                    <a href="{{ url()->current() }}" class="btn btn-secondary d-flex align-items-center px-3" title="Clear Search">
+                    <a href="{{ url()->current() }}" class="btn btn-secondary d-flex align-items-center px-3"
+                        title="Clear Search">
                         <i class="fas fa-times"></i>
                     </a>
                 </div>
@@ -59,7 +52,7 @@
                     <th>Email</th>
                     <th>Login Type</th>
                     <th>Current Role</th>
-                    <th>Change Role</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -81,35 +74,105 @@
                         </span>
                     </td>
                     <td>
-                        <form action="{{ route('admin.users.role', $user->id) }}"
-                            method="POST"
-                            class="d-flex align-items-center">
+                        <!-- Update Button -->
+                        <button type="button" class="btn btn-outline-success btn-sm shadow-sm px-3 rounded-pill"
+                            data-bs-toggle="modal" data-bs-target="#updateRoleModal{{ $user->id }}">
 
-                            @csrf
+                            <i class="fa-solid fa-pen-to-square me-1"></i>
+                            Update
+                        </button>
 
-                            <select name="role"
-                                class="form-select form-select-sm border-0 shadow-sm me-3"
-                                style="width: 140px; margin-left: 10px;">
+                        <!-- Premium Update Modal -->
+                        <div class="modal fade" id="updateRoleModal{{ $user->id }}" tabindex="-1"
+                            aria-labelledby="updateRoleModalLabel{{ $user->id }}" aria-hidden="true">
 
-                                <option value="user"
-                                    {{ $user->role == 'user' ? 'selected' : '' }}>
-                                    👤 User
-                                </option>
+                            <div class="modal-dialog modal-dialog-centered">
 
-                                <option value="admin"
-                                    {{ $user->role == 'admin' ? 'selected' : '' }}>
-                                    🛡️ Admin
-                                </option>
+                                <div class="modal-content border-0 overflow-hidden shadow-lg">
 
-                            </select>
+                                    <!-- Top Border -->
+                                    <div class="bg-success" style="height: 6px;"></div>
 
-                            <button class="btn btn-success btn-sm shadow-sm px-3">
-                                <i class="fa-solid fa-pen-to-square me-1"></i>
-                                Update
-                            </button>
+                                    <!-- Body -->
+                                    <div class="modal-body p-5 text-center">
 
-                        </form>
+                                        <!-- Icon -->
+                                        <div class="mb-4">
+                                            <div class="delete-icon-box mx-auto">
+
+                                                <i class="fas fa-user-shield text-success" style="font-size: 45px;"></i>
+
+                                            </div>
+                                        </div>
+
+                                        <!-- Title -->
+                                        <h3 class="fw-bold text-dark mb-3">
+                                            Update User Role?
+                                        </h3>
+
+                                        <!-- User -->
+                                        <p class="text-muted mb-1">
+                                            You are changing role for:
+                                        </p>
+
+                                        <h5 class="fw-semibold text-dark mb-4">
+                                            {{ $user->name }}
+                                        </h5>
+
+                                        <!-- Form -->
+                                        <form action="{{ route('admin.users.role', $user->id) }}" method="POST">
+
+                                            @csrf
+
+                                            <div class="mb-4">
+
+                                                <select name="role" class="form-select shadow-sm rounded-pill px-4">
+
+                                                    <option value="user" {{ $user->role == 'user' ? 'selected' : '' }}>
+
+                                                        👤 User
+                                                    </option>
+
+                                                    <option value="admin"
+                                                        {{ $user->role == 'admin' ? 'selected' : '' }}>
+
+                                                        🛡️ Admin
+                                                    </option>
+
+                                                </select>
+
+                                            </div>
+
+                                            <!-- Buttons -->
+                                            <div class="d-flex justify-content-center gap-3">
+
+                                                <button type="button"
+                                                    class="btn btn-light px-4 rounded-pill fw-semibold"
+                                                    data-bs-dismiss="modal">
+
+                                                    Cancel
+                                                </button>
+
+                                                <button type="submit"
+                                                    class="btn btn-success px-4 rounded-pill fw-semibold shadow-sm">
+
+                                                    <i class="fas fa-check me-1"></i>
+                                                    Confirm Update
+                                                </button>
+
+                                            </div>
+
+                                        </form>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
                     </td>
+                    </form>
                 </tr>
                 @empty
                 <tr>
@@ -121,4 +184,5 @@
     </div>
 
 </div>
+
 @endsection

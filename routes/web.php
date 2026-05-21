@@ -87,7 +87,7 @@ Route::prefix('user')->group(function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
-    Route::post('/admin/users/{id}/role', [OrderItemController::class, 'updateRole'])->name('admin.users.role');
+    Route::post('/admin/users/{id}/role', [UserController::class, 'updateRole'])->name('admin.users.role');
 });
 // ------------------------ END Admin ------------------------
 
@@ -118,6 +118,11 @@ Route::prefix('admin')->group(function () {
 // ------------------------ Admin Cayegories ------------------------
 Route::prefix('admin')->group(function () {
     Route::get('/product', [AdminProductController::class, 'index'])->name('admin.product.index');
+    Route::get('/product/create', [AdminProductController::class, 'create'])->name('admin.product.create');
+    Route::post('/product', [AdminProductController::class, 'store'])->name('admin.product.store');
+    Route::get('/product/{id}/edit', [AdminProductController::class, 'edit'])->name('admin.product.edit');
+    Route::put('/product/{id}', [AdminProductController::class, 'update'])->name('admin.product.update');
+    Route::delete('/product/{id}', [AdminProductController::class, 'destroy'])->name('admin.product.destroy');
 });
 // ------------------------ End  Admin Cayegories ------------------------
 

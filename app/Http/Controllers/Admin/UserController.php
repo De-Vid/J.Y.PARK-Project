@@ -29,9 +29,6 @@ class UserController extends Controller
         return view('admin.users.index', compact('users'));
     }
 
-
-
-
     public function updateRole(Request $request, $id)
     {
         $request->validate([

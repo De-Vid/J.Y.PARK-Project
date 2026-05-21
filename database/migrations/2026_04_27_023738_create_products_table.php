@@ -12,10 +12,12 @@ return new class extends Migration
             $table->id();
             $table->string('name', 255);
             $table->decimal('price', 10, 2);
+            $table->integer('stock')->default(0);
             $table->text('description')->nullable();
             $table->string('image', 255)->nullable();
+            $table->string('image1', 255)->nullable();
+            $table->string('image2', 255)->nullable();
             $table->timestamps();
         });
     }
-
 };

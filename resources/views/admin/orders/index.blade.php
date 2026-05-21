@@ -12,7 +12,7 @@
 </div>
 @endif
 <div class="px-3">
-    <h2 class="m-0 font-weight-bold">Product List</h2>
+    <h2 class="m-0 font-weight-bold">Orders</h2>
 </div>
 
 <div class="card">
@@ -56,13 +56,22 @@
                     <td>{{ $order->user->name ?? 'N/A' }}</td>
                     <td>${{ number_format($order->total, 2) }}</td>
                     <td>
-                        <span class="badge badge-{{ $order->status }}">
+                        @php
+                        $badgeColor = match($order->status) {
+                        'pending' => 'warning', // ពណ៌លឿង
+                        'completed' => 'success', // ពណ៌បៃតង
+                        'cancelled' => 'danger', // ពណ៌ក្រហម
+                        default => 'secondary' // ពណ៌ប្រផេះ (ករណីផ្សេងទៀត)
+                        };
+                        @endphp
+
+                        <span class="badge badge-{{ $badgeColor }}">
                             {{ ucfirst($order->status) }}
                         </span>
                     </td>
                     <td>{{ $order->created_at->format('Y-m-d') }}</td>
                     <td class="text-center">
-                        <a href="{{ route('admin.orders.check', $order->id) }}" class="btn btn-sm btn-success font-weight-bold px-3" title="View Details">
+                        <a href="{{ route('admin.orders.check', $order->id) }}" class="btn btn-sm btn-outline-success font-weight-bold px-3" title="View Details">
                             {{ $order->orderItems->count() }} {{ Str::plural('Item', $order->orderItems->count()) }}
                         </a>
                     </td>
